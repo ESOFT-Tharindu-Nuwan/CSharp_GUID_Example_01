@@ -1,0 +1,18 @@
+﻿@model Book
+
+<h1>Details of @Model.Name</h1>
+
+<div class="mt-3">
+	<h3>Book GUID</h3>
+	<div class="text-primary fw-bold fs-3">@Model.Id</div>
+</div>
+<div class="mt-3">
+	<h3>Book Author</h3>
+	<div class="text-primary fw-bold fs-3">@Model.Author</div>
+</div>
+<div class="mt-3">
+	<h3>Book ISBN</h3>
+	<div class="text-primary fw-bold fs-3">@Model.Isbn</div>
+</div>
+
+<a class="btn btn-warning mt-4" asp-controller="Book" asp-action="Index">Cancel</a>
