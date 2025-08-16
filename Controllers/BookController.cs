@@ -14,7 +14,7 @@ namespace Ebook.Controllers
 
         public IActionResult Index()
         {
-            var books = _context.Books.ToList();
+            var books = _context.Books.Where(c=> c.DeletedAt == null).ToList(); // This filters the books DeletedAt not null
             return View(books);
         }
 
@@ -58,7 +58,15 @@ namespace Ebook.Controllers
         public IActionResult Delete(Guid id)
         {
             var bookDetail = _context.Books.Find(id);
-            _context.Books.Remove(bookDetail);
+            return View(bookDetail);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletConfirm(Guid id)
+        {
+            var book = _context.Books.Find(id);
+            book.DeletedAt = DateTime.Now;
+            _context.Books.Update(book);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
